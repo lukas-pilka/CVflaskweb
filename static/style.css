@@ -1,5 +1,7 @@
 body {
   font-family: 'Ubuntu Mono', monospace;
+  width: 300%;
+  padding: 2em;
 }
 header {
   margin-bottom: 10em;
@@ -11,13 +13,8 @@ header {
   animation-delay:0s ;
   animation-name: show-item;
   display: block;
-  background: #ccc;
-  padding: 1em;
-  margin: 0;
-  margin-bottom: 0.5em;
+  margin: 0 0 1.5em 0;
   box-sizing: border-box;
-  position: relative;
-  min-width: 10%;
   text-decoration: none;
   color: #000;
   max-height: 0;
@@ -27,15 +24,24 @@ header {
     100%    {opacity:1; max-height: 100%;}
 }
 a.cvitem:hover {
-  background: #eee;
+  color: #ccc;
+}
+.itembar {
+  position: relative;
+  border-bottom: 2px solid #ccc;
+  height: 1em;
+  padding: 0 0 0.2em 0;
+  margin: 0 0 0.2em 0;
+  min-width: 10em;
+  color: #ccc;
 }
 .cvitem .item-enddate{
   position: absolute;
   left: 0;
-  top:-1em;
+  top:0;
 }
 .cvitem .item-startdate{
   position: absolute;
   right: 0;
-  top:-1em;
+  top:0;
 }

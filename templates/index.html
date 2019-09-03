@@ -29,39 +29,54 @@
 
 <!--{{ now }} {{ historyStartDate }} {{ HistoryDaysCount }}-->
 {% for item in cvitems|sort(attribute='event.dateFrom', reverse=True) %}
+
+
   {% if item.event.url is defined %}
-    <a href="{{ item.event.url}}" class="cvitem" target="_blank" style="width: {{ item.event.dayscount / HistoryDaysCount * 100}}%; margin-left: {{ item.event.daystonow / HistoryDaysCount * 100}}%">
-      <div class="item-enddate">
-        {% if item.event.dateTo is defined %}
-            {{item.event.dateTo.strftime('%m %Y')}}
+    <a href="{{ item.event.url}}" class="cvitem" target="_blank" style="margin-left: {{ item.event.daystonow / HistoryDaysCount * 100}}%">
+      <div class="itembar" style="width: {{ item.event.dayscount / HistoryDaysCount * 100}}%">
+        <div class="item-enddate">
+        {% if item.event.dateTo is defined and item.event.dateTo != item.event.dateFrom %}
+          {{item.event.dateTo.strftime('%m/%Y')}}
+        {% elif item.event.dateTo is defined and item.event.dateTo == item.event.dateFrom %}
+          Published:
         {% else %}
           ?
         {% endif %}
+        </div>
+        <div class="item-startdate">
+          {{item.event.dateFrom.strftime('%m/%Y')}}
+        </div>
       </div>
       <div class="item-subject">
-        <strong>{{ item.event.subject}} | {{ item.event.category}}</strong><br>{{ item.event.description}}
+        <strong>{{ item.event.subject}}</strong> |&nbsp;{{ item.event.category}} |&nbsp;{{ item.event.description}}
       </div>
-      <div class="item-startdate">
-        {{ item.event.dateFrom.strftime('%m %Y')}}
-      </div>
+
     </a>
+
+
   {% else %}
-    <div class="cvitem" style="width: {{ item.event.dayscount / HistoryDaysCount * 100}}%; margin-left: {{ item.event.daystonow / HistoryDaysCount * 100}}%">
-      <div class="item-enddate">
-        {% if item.event.dateTo is defined %}
-            {{item.event.dateTo.strftime('%m %Y')}}
+    <div class="cvitem" style="margin-left: {{ item.event.daystonow / HistoryDaysCount * 100}}%">
+      <div class="itembar" style="width: {{ item.event.dayscount / HistoryDaysCount * 100}}%">
+        <div class="item-enddate">
+        {% if item.event.dateTo is defined and item.event.dateTo != item.event.dateFrom %}
+          {{item.event.dateTo.strftime('%m/%Y')}}
+        {% elif item.event.dateTo is defined and item.event.dateTo == item.event.dateFrom %}
+          Published:
         {% else %}
           ?
         {% endif %}
+        </div>
+        <div class="item-startdate">
+          {{item.event.dateFrom.strftime('%m/%Y')}}
+        </div>
       </div>
       <div class="item-subject">
-        <strong>{{ item.event.subject}} | {{ item.event.category}}</strong><br>{{ item.event.description}}
-      </div>
-      <div class="item-startdate">
-        {{ item.event.dateFrom.strftime('%m %Y')}}
+        <strong>{{ item.event.subject}}</strong> |&nbsp;{{ item.event.category}} |&nbsp;{{ item.event.description}}
       </div>
     </div>
   {% endif %}
+
+
 {% endfor %}
 
 </body>
