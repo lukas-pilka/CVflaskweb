@@ -1,26 +1,68 @@
 <!doctype html>
 <html>
 <head>
-  <title>Datastore and Firebase Auth Example</title>
+  <title>Lukas Pilka CV</title>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700,700i&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<style>
+<!--
+{% for item in range(0,cvitems|length+3) %}
+    .cvitem:nth-child({{ cvitems|length+3 - item }})  {animation-delay: {{ item * 250 }}ms;}
+{% endfor %}
+-->
+
+</style>
+
+<header>
   <h1>Lukas Pilka</h1>
-  {{ now }} {{ historyStartDate }} {{ HistoryDaysCount }}
-  {% for item in cvitems %}
-    <p>
-      <strong>{{ item.event.category}}: {{ item.event.subject}}</strong>
-      {{ item.event.description}}
-      {{ item.event.dateFrom.strftime('%m %Y')}}
-      {% if item.event.dateTo is defined %}
-        value of variable: {{item.event.dateTo.strftime('%m %Y')}}
-      {% endif %}
-      {{ item.event.url}}
-      {{ item.event.dayscount}}
-    </p>
-  {% endfor %}
+  <p>
+    Born 1986<br>
+    Lives in Prague, Czech Republic, EU<br>
+    Cell: +420 774 502 521<br>
+    pilka@blueghost.cz<br>
+  </p>
+</header>
+
+<!--{{ now }} {{ historyStartDate }} {{ HistoryDaysCount }}-->
+{% for item in cvitems|sort(attribute='event.dateFrom', reverse=True) %}
+  {% if item.event.url is defined %}
+    <a href="{{ item.event.url}}" class="cvitem" target="_blank" style="width: {{ item.event.dayscount / HistoryDaysCount * 100}}%; margin-left: {{ item.event.daystonow / HistoryDaysCount * 100}}%">
+      <div class="item-enddate">
+        {% if item.event.dateTo is defined %}
+            {{item.event.dateTo.strftime('%m %Y')}}
+        {% else %}
+          ?
+        {% endif %}
+      </div>
+      <div class="item-subject">
+        <strong>{{ item.event.subject}} | {{ item.event.category}}</strong><br>{{ item.event.description}}
+      </div>
+      <div class="item-startdate">
+        {{ item.event.dateFrom.strftime('%m %Y')}}
+      </div>
+    </a>
+  {% else %}
+    <div class="cvitem" style="width: {{ item.event.dayscount / HistoryDaysCount * 100}}%; margin-left: {{ item.event.daystonow / HistoryDaysCount * 100}}%">
+      <div class="item-enddate">
+        {% if item.event.dateTo is defined %}
+            {{item.event.dateTo.strftime('%m %Y')}}
+        {% else %}
+          ?
+        {% endif %}
+      </div>
+      <div class="item-subject">
+        <strong>{{ item.event.subject}} | {{ item.event.category}}</strong><br>{{ item.event.description}}
+      </div>
+      <div class="item-startdate">
+        {{ item.event.dateFrom.strftime('%m %Y')}}
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
 
 </body>
 </html>

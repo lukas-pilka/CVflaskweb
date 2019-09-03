@@ -21,6 +21,8 @@ for i in cvitems:
             dateTo = now
         daysCount = dateTo - dateFrom
         event["dayscount"] = daysCount.days
+        daysToNow = now - dateTo
+        event["daystonow"] = daysToNow.days
 
 # Searches from oldest dateFrom and sets like a history start date
 

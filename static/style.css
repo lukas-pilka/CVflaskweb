@@ -1,3 +1,41 @@
 body {
-  font-family: "helvetica", sans-serif;
+  font-family: 'Ubuntu Mono', monospace;
+}
+header {
+  margin-bottom: 10em;
+}
+.cvitem {
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+  animation-delay:0s ;
+  animation-name: show-item;
+  display: block;
+  background: #ccc;
+  padding: 1em;
+  margin: 0;
+  margin-bottom: 0.5em;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 10%;
+  text-decoration: none;
+  color: #000;
+  max-height: 0;
+}
+@keyframes show-item {
+    0%      {opacity:0; max-height: 0;}
+    100%    {opacity:1; max-height: 100%;}
+}
+a.cvitem:hover {
+  background: #eee;
+}
+.cvitem .item-enddate{
+  position: absolute;
+  left: 0;
+  top:-1em;
+}
+.cvitem .item-startdate{
+  position: absolute;
+  right: 0;
+  top:-1em;
 }
