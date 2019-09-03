@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <title>Datastore and Firebase Auth Example</title>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <h1>Lukas Pilka</h1>
+
+  {% for item in cvitems %}
+    <p>
+      <strong>{{ item.event.category}}: {{ item.event.subject}}</strong>
+      {{ item.event.description}}
+      {{ item.event.dateFrom.strftime('%m %Y')}}
+      {% if item.event.dateTo is defined %}
+        value of variable: {{item.event.dateTo.strftime('%m %Y')}}
+      {% endif %}
+      {{ item.event.url}}
+    </p>
+  {% endfor %}
+
+</body>
+</html>
