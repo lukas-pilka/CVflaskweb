@@ -4,7 +4,6 @@ db = firestore.Client()
 collection_ref = db.collection(u'cvitems').get()
 cvitems = list(doc.to_dict() for doc in collection_ref)
 
-
 # counts days between dateFrom and dateTo and adds sum to dict
 import datetime
 
@@ -12,7 +11,7 @@ now = datetime.date.today()
 
 for i in cvitems:
     for event in i.values():
-        dateFrom = event.get('dateFrom', 0)
+        dateFrom = event.get('dateFrom', now)
         dateFrom = dateFrom.date()
         dateTo = event.get('dateTo')
         if dateTo != None:
@@ -37,6 +36,13 @@ for i in cvitems:
 HistoryDaysCount = now - historyStartDate
 HistoryDaysCount = HistoryDaysCount.days
 
+# expands cvitems containers
+
+expandedItems = []
+for item in cvitems:
+    expandedItems.append(item.get("event"))
+
+
 # flask routing
 
 from flask import Flask, render_template
@@ -46,7 +52,7 @@ app = Flask(__name__)
 @app.route('/')
 def root():
 
-    return render_template('index.html', cvitems=cvitems, historyStartDate=historyStartDate, now=now, HistoryDaysCount=HistoryDaysCount)
+    return render_template('index.html', expandedItems=expandedItems, historyStartDate=historyStartDate, now=now, HistoryDaysCount=HistoryDaysCount)
 
 
 if __name__ == '__main__':
