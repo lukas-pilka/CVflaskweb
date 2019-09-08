@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Lukas Pilka CV</title>
+  <title>Lukas Pilka</title>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700,700i&display=swap" rel="stylesheet">
@@ -9,12 +9,9 @@
 <body>
 
 <style>
-<!--
 {% for item in range(0,expandedItems|length+3) %}
     .cvitem:nth-child({{ item }})  {animation-delay: {{ item * 250 }}ms;}
 {% endfor %}
--->
-
 </style>
 
 <header>
@@ -25,12 +22,11 @@
     Cell: +420 774 502 521<br>
     pilka@blueghost.cz<br>
       <a href="https://www.facebook.com/lukas.pilka" target="_blank">Fb</a> |
-      <a href="https://www.linkedin.com/in/luk%C3%A1%C5%A1-pilka-381a8b70/" target="_blank">in</a> |
+      <a href="https://www.linkedin.com/in/luk%C3%A1%C5%A1-pilka-381a8b70/" target="_blank">In</a> |
       <a href="https://twitter.com/LukasPilka" target="_blank">Tw</a>
   </p>
 </header>
 
-<!--{{ now }} {{ historyStartDate }} {{ HistoryDaysCount }}-->
 {% for item in expandedItems|sort(attribute='dateFrom', reverse=True) %}
 
   {% if item.url is defined %}
