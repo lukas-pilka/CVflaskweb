@@ -10,7 +10,7 @@
 
 <style>
 {% for item in range(0,expandedItems|length+3) %}
-    .cvitem:nth-child({{ item }})  {animation-delay: {{ item * 250 }}ms;}
+    .cvrow:nth-child({{ item }})  {animation-delay: {{ item * 250 }}ms;}
 {% endfor %}
 </style>
 
@@ -22,15 +22,19 @@
     Cell: +420 774 502 521<br>
     pilka@blueghost.cz<br>
       <a href="https://www.facebook.com/lukas.pilka" target="_blank">Fb</a> |
-      <a href="https://www.linkedin.com/in/luk%C3%A1%C5%A1-pilka-381a8b70/" target="_blank">In</a> |
+      <a href="https://www.linkedin.com/in/luk%C3%A1%C5%A1-pilka-381a8b70/" target="_blank">in</a> |
       <a href="https://twitter.com/LukasPilka" target="_blank">Tw</a>
   </p>
 </header>
 
 {% for item in expandedItems|sort(attribute='dateFrom', reverse=True) %}
 
+<div class="cvrow">
+
   {% if item.url is defined %}
+
     <a href="{{ item.url}}" class="cvitem" target="_blank" style="margin-left: {{ item.daystonow / HistoryDaysCount * 100}}%">
+
       <div class="itembar" style="width: {{ item.dayscount / HistoryDaysCount * 100}}%">
         <div class="item-enddate">
         {% if item.dateTo is defined and item.dateTo != item.dateFrom %}
@@ -51,6 +55,7 @@
     </a>
 
   {% else %}
+
     <div class="cvitem" style="margin-left: {{ item.daystonow / HistoryDaysCount * 100}}%">
       <div class="itembar" style="width: {{ item.dayscount / HistoryDaysCount * 100}}%">
         <div class="item-enddate">
@@ -71,6 +76,8 @@
       </div>
     </div>
   {% endif %}
+
+</div>
 
 {% endfor %}
 
